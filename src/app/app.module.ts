@@ -4,7 +4,6 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { TemplateFormModule } from './template-form/template-form.module';
 import { DataFormModule } from './data-form/data-form.module';
 
 @NgModule({
@@ -16,7 +15,6 @@ import { DataFormModule } from './data-form/data-form.module';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    TemplateFormModule,
     DataFormModule
   ],
   providers: [],
