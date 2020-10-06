@@ -11,9 +11,6 @@ export class DropdownService {
 
   constructor(private http: HttpClient) { }
 
-  
-
- 
   getEstadosBr() {
     return this.http.get<EstadosBr[]>('assets/dados/estadosbr.json');
   }
