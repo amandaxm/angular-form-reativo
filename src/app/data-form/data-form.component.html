@@ -1,6 +1,6 @@
 <form class="form-horizontal" [formGroup]="formulario"(ngSubmit)="onSubmit()" >
 
- <div class="form-group"[ngClass]="aplicaCssErro('nome')" >
+ <div class="form-group" [ngClass]="aplicaCssErro('nome')" >
   <div class="col-sm-12">
     <label for="email" class="control-label">Nome</label>
   </div>
@@ -61,6 +61,9 @@
 
       <div class="col-md-3" [ngClass]="aplicaCssErro('endereco.estado')">
         <label for="estado" class="control-label">Estado</label>
+        <select class="form-control" id="estado" formControlName="estado">
+          <option *ngFor="let estado of estados |async" [value]="estado.nome">{{ estado.nome}}</option>
+        </select>
       </div>
     </div>
 
