@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { compileComponentFromMetadata } from '@angular/compiler';
-
+import { DropdownService } from './services/dropdown.service';
+import { EstadosBr } from '../shared/models/estados-br.model';
 @Component({
   selector: 'app-data-form',
   templateUrl: './data-form.component.html',
@@ -11,28 +12,19 @@ import { compileComponentFromMetadata } from '@angular/compiler';
 export class DataFormComponent implements OnInit {
 
   formulario: FormGroup; // VAI REPRESENTAR O FORMULARIO
-
+  estados: EstadosBr[];
+  
   constructor(private formBuilder: FormBuilder,
     private http: HttpClient,
+    private dropdownService: DropdownService
   ) { }
 
   ngOnInit(): void {
-    this.formulario = this.formBuilder.group({
-      nome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
-      email: [null, [Validators.required, Validators.email]],
-     
-      endereco: this.formBuilder.group({
-      cep: [null, Validators.required],
-      numero: [null, Validators.required],
-      complemento: [null],
-      rua: [null, Validators.required],
-      bairro: [null, Validators.required],
-      cidade: [null, Validators.required],
-      estado: [null, Validators.required],
-    }),
-    });
-
-  }
+    this.dropdownService.getEstadosBr()
+      .subscribe((dados: EstadosBr[]) => {
+        this.estados = dados;
+      }
+      )}
 
   onSubmit() {
     console.log(this.formulario.value);
