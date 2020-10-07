@@ -16,7 +16,8 @@ export class DataFormComponent implements OnInit {
   formulario: FormGroup; // VAI REPRESENTAR O FORMULARIO
   estados: Observable<EstadosBr[]>;
   cargos: any[];
-
+  tecnologias:any[];
+  newsletterOp:any[];
   constructor(
     private formBuilder: FormBuilder,
     private http: HttpClient,
@@ -27,7 +28,8 @@ export class DataFormComponent implements OnInit {
   ngOnInit(): void {
     this.estados = this.dropdownService.getEstadosBr();
    this.cargos=this.dropdownService.getCargos();
-
+   this.tecnologias=this.dropdownService.getTecnologia();
+    this.newsletterOp= this.dropdownService.getNewslleter();
     this.formulario = this.formBuilder.group({
       nome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
       email: [null, [Validators.required, Validators.email]],
@@ -41,7 +43,9 @@ export class DataFormComponent implements OnInit {
       cidade: [null, Validators.required],
       estado: [null, Validators.required],
     }),
-    cargo:[null]
+    cargo:[null],
+    tecnologias:[null],
+    newsletter: ['s'],
 
   });
 
@@ -131,4 +135,10 @@ export class DataFormComponent implements OnInit {
   compararCargos(obj1, obj2) {
     return obj1 && obj2 ? (obj1.nome === obj2.nome && obj1.nivel === obj2.nivel) : obj1 === obj2;
   }
+
+  setarTecnologia() {
+    this.formulario.get('tecnologias').setValue(['java','javascript','angular']);
+  }
+
+  
 }
